@@ -8,6 +8,8 @@
     clippy::missing_panics_doc
 )]
 
+// 二进制 crate 根
+
 mod activity;
 mod cgroup;
 mod config;
@@ -16,11 +18,15 @@ mod misc;
 mod policy;
 mod scheduler;
 mod utils;
+// 二进制crate为什么也要声明模块树？
+// 为啥没见二进制crate根用到库crate中的模块和
 
 use core::{ffi::CStr, slice};
 use libc::{c_char, c_int};
 use misc::init_misc;
 use scheduler::Scheduler;
+
+// 二进制 crate 中只保留足以生成一个可执行文件的代码，并由可执行文件调用库 crate 的代码
 
 #[global_allocator]
 static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;

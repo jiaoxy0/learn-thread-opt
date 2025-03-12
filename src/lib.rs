@@ -8,6 +8,13 @@
     clippy::missing_panics_doc
 )]
 
+// 库 crate 根
+
+// 模块树应该定义在 src/lib.rs 中
+/*这样通过以包名开头的路径，公有项就可以在二进制
+crate 中使用。二进制 crate 就变得同其它在该 crate 之外的、使用库 crate 的用户一
+样：二者都只能使用公有 API。这有助于你设计一个好的 API；你不仅仅是作者，也
+是用户！ */
 mod activity;
 mod cgroup;
 mod config;
