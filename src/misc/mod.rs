@@ -6,6 +6,8 @@ use likely_stable::unlikely;
 use log::info;
 use logger::{init_log, log_metainfo};
 
+/// 初始化杂项：
+/// 设置本线程后台运行权限、初始化tklog日志库、设置主线程名字、输出版本信息日志、输出杂项日志、输出CPU信息日志
 pub fn init_misc() {
     working_in_background();
     init_log();
@@ -15,6 +17,8 @@ pub fn init_misc() {
     print_group_core();
 }
 
+/// 把本线程的pid转换成C字符串，写入/dev/cpuset/background/tasks文件中
+/// 涉及c库函数：getpid()
 fn working_in_background() {
     unsafe {
         let pid = getpid();
@@ -24,6 +28,8 @@ fn working_in_background() {
     }
 }
 
+/// 将主线程的名称设置为AffinitySetter
+/// 涉及c库函数：pthread_self() pthread_setname_np()
 fn set_main_thread_name(name: &[u8]) {
     let thread_name = if unlikely(name.len() > 15) {
         &name[..15]
@@ -36,6 +42,7 @@ fn set_main_thread_name(name: &[u8]) {
     }
 }
 
+/// 输出一些log
 fn print_misc() {
     info!("免费软件，禁止商用");
     info!("Free software, not for commercial use.");

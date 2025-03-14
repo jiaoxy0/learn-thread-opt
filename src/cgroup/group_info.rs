@@ -13,6 +13,11 @@ pub fn get_background_group() -> &'static [u8] {
     &BACKEND_GROUP
 }
 
+/// 把CPU核心信息输出到log
+/// eg: 
+/// [{time}] INFO: TOP_GROUP: [6, 7]
+/// [{time}] INFO: MIDDLE_GROUP: [0, 1, 2, 3, 4, 5]
+/// [{time}] INFO: BACKEND_GROUP: []
 pub fn print_group_core() {
     let top_group = get_top_group();
     let middle_group = get_middle_group();

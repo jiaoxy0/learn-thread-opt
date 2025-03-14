@@ -33,7 +33,10 @@ static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
 #[unsafe(no_mangle)]
 unsafe extern "C" fn main(argc: c_int, argv: *const *const c_char) {
+    // 初始化杂项
     init_misc();
+
+    // 处理命令行参数
     let args = unsafe { slice::from_raw_parts(argv, argc.try_into().unwrap_or(0)) };
 
     for arg in args {
@@ -42,5 +45,7 @@ unsafe extern "C" fn main(argc: c_int, argv: *const *const c_char) {
             log::info!("命令行参数{s}");
         }
     }
+
+    // run
     Scheduler::new().start_run();
 }

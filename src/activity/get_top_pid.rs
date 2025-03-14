@@ -28,6 +28,7 @@ impl TopPidInfo {
     }
 }
 
+// ActivityUtil类型包含的类型1：TopAppUtils
 pub struct TopAppUtils {
     dumper: Dumpsys,
     inotify: Inotify,

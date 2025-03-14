@@ -2,6 +2,7 @@
 use log::info;
 use tklog::{LEVEL, LOG};
 
+/// 初始化tklog日志库，之后便可以用info!宏输出log
 pub fn init_log() {
     let logger = LOG;
     logger.set_level(LEVEL::Debug);
@@ -9,6 +10,7 @@ pub fn init_log() {
     logger.uselog();
 }
 
+/// 用于输出一条log
 pub fn log_metainfo() {
     info!(
         "thread-opt v{} {}, llvm-{}, rustc-{}, on {},{},{}",
